@@ -39,6 +39,20 @@ CREATE TABLE `houses` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `house_id` int(11) NOT NULL COMMENT '對應房源的ID',
+  `user_name` varchar(255) NOT NULL COMMENT '評論者名稱',
+  `comment` text NOT NULL COMMENT '評價內容與續租意願',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 --
 -- 已傾印資料表的索引
 --
@@ -50,6 +64,13 @@ ALTER TABLE `houses`
   ADD PRIMARY KEY (`id`);
 
 --
+-- 資料表索引 `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `house_id` (`house_id`);
+
+--
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
 --
 
@@ -57,6 +78,12 @@ ALTER TABLE `houses`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `houses`
 --
 ALTER TABLE `houses`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `reviews`
+--
+ALTER TABLE `reviews`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
